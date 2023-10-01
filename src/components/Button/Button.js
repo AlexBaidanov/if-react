@@ -6,7 +6,7 @@ import './Button.css';
 export const Button = ({ className, type = 'button' }) => {
   return (
     <button className={classNames(className)} type={type}>
-      <div className="homes__arrow--ellipse"></div>
+      <div className="homes__arrow--pike"></div>
     </button>
   );
 };

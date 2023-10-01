@@ -1,4 +1,4 @@
-@import url('../src/fonts/fonts.css');
+@import url('../fonts/fonts.css');
 
 :root {
   --white: #ffffff;
@@ -31,6 +31,31 @@
   font-weight: var(--font-medium);
   margin-bottom: 105px;
   position: relative;
+}
+
+.title:hover:after {
+  display: inline-block;
+  content: '';
+  width: 100px;
+  height: 4px;
+  background-color: var(--yellow);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 500%);
+  animation: title__underline 250ms ease-in-out;
+}
+
+@keyframes title__underline {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .description {

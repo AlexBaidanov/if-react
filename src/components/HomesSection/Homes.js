@@ -4,12 +4,12 @@ import { data } from './config';
 
 export const Homes = () => (
   <div className="homes__variants description">
-    {data.map(() => (
-      <figure key={data.id} className="homes__item _mobile">
-        <img className="homes__image" src={data.imageUrl} alt={data.name} />
-        <figcaption className="homes__description">{data.name}</figcaption>
+    {data.slice(0,4).map((item) => (
+      <figure key={item.id} className="homes__item _mobile">
+        <img className="homes__image" src={item.imageUrl} alt={item.name} />
+        <figcaption className="homes__description">{item.name}</figcaption>
         <figcaption className="homes__place">
-          {data.city}, {data.country}
+          {item.city}, {item.country}
         </figcaption>
       </figure>
     ))}

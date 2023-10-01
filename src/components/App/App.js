@@ -15,7 +15,7 @@ export const App = () => {
             Homes guests loves
           </h2>
           <Homes />
-          <Button />
+          <Button className='homes__arrow--ellipse'/>
         </Container>
       </section>
     </>

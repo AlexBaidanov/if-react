@@ -1,0 +1,18 @@
+.button {
+    cursor: pointer;
+}
+
+[class*='--ellipse'] {
+    width: 28px;
+    height: 28px;
+}
+
+.homes__arrow--ellipse {
+    top: 50%;
+    left: 91%;
+}
+
+[class*='arrow--pike'] {
+    width: 10px;
+    height: 10px;
+}

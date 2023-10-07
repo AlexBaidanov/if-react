@@ -1,0 +1,40 @@
+@import url('../src/fonts/fonts.css');
+
+:root {
+  --white: #ffffff;
+  --yellow: #f5bd41;
+  --stroke-color: #f3f3f4;
+  --blue: #10367c;
+  --accent-blue: #3077c6;
+  --bg-color: #eaf0f9;
+  --text-color: #383838;
+  --secondary-text: #bfbfbf;
+
+  --font-regular: 400;
+  --font-medium: 500;
+  --col-width: calc(100% / 12);
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+.text__center {
+  text-align: center;
+}
+
+.title {
+  color: var(--text-color);
+  font-size: 40px;
+  font-weight: var(--font-medium);
+  margin-bottom: 105px;
+  position: relative;
+}
+
+.description {
+  font-size: 24px;
+  font-weight: var(--font-regular);
+  color: var(--text-color);
+}

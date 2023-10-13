@@ -1,0 +1,31 @@
+.button {
+  cursor: pointer;
+}
+
+[class*='arrow--ellipse'] {
+  background-color: var(--stroke-color);
+  border: transparent;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 1px 3px 10px 1px rgba(56, 56, 56, 0.2);
+}
+
+.homes__arrow--ellipse {
+  position: absolute;
+  top: 50%;
+  left: 91%;
+  transform: translateY(-50%);
+}
+[class*='arrow--pike'] {
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--text-color);
+  border-radius: 2px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.homes__arrow--pike {
+  transform: translate(60%, 5%) rotate(315deg);
+}

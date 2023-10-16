@@ -3,10 +3,10 @@ import classNames from 'classnames';
 
 import './Button.css';
 
-export const Button = ({ className, type = 'button' }) => {
+export const Button = ({children, className, type = 'button' }) => {
   return (
-    <button className={classNames(className)} type={type}>
-      <div className="homes__arrow--pike"></div>
+    <button className={classNames('button',className)} type={type}>
+      {children}
     </button>
   );
 };

@@ -6,17 +6,13 @@ import { dataAvailable } from './config';
 export function Form({ setResults }) {
   const [search, setSearch] = useState('');
 
-  function hotelSearch(event) {
-    // const searchValue = event.target.value;
-    setSearch(event.target.value);
-    setResults(
-      dataAvailable.filter(
-        (hotel) =>
-          hotel.name &&
-          search &&
-          hotel.name.toLowerCase().includes(event.target.value.toLowerCase()),
+  function hotelSearch() {
+    const filteredResults = dataAvailable.filter((hotel) =>
+      Object.values(hotel).some((value) =>
+        value.toString().toLowerCase().includes(search.toLowerCase()),
       ),
     );
+    setResults(filteredResults);
   }
 
   return (
@@ -24,7 +20,7 @@ export function Form({ setResults }) {
       className="header__form"
       onSubmit={(event) => {
         event.preventDefault();
-        hotelSearch(event);
+        hotelSearch();
       }}
     >
       <Search className="form__destination-search" />

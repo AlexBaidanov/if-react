@@ -32,3 +32,11 @@
   color: var(--secondary-text);
   line-height: 1.5;
 }
+
+.available {
+  display: none;
+}
+
+._visible {
+  display: block;
+}

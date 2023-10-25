@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { Button } from '../../Button';
 import { Search } from '../../../Icons';
-import { dataAvailable } from './config';
+import { searchUrl } from '../../../services/constants';
 
 export function Form({ setResults }) {
   const [search, setSearch] = useState('');
 
-  function hotelSearch() {
-    const filteredResults = dataAvailable.filter((hotel) =>
-      Object.values(hotel).some((value) =>
-        value.toString().toLowerCase().includes(search.toLowerCase()),
-      ),
-    );
-    setResults(filteredResults);
+  async function hotelSearch() {
+    const response = await fetch(`${searchUrl}=${search}`);
+    const data = await response.json();
+    setResults(data);
   }
 
   return (

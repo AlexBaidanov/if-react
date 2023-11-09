@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 import { Button } from '../../Button';
 import { Search } from '../../../Icons';
 import { searchUrl } from '../../../services/constants';
+import './Form.css';
 
 export function Form({ setResults }) {
   const [search, setSearch] = useState('');
+  const [checkInDate, setCheckInDate] = useState(new Date());
+  const [checkOutDate, setCheckOutDate] = useState(new Date());
 
   async function hotelSearch() {
     const response = await fetch(`${searchUrl}=${search}`);
@@ -37,12 +44,13 @@ export function Form({ setResults }) {
         <label className="form__label form__text check-in" htmlFor="check-in">
           Check in
         </label>
-        <input
+        <DatePicker
+          selected={checkInDate}
+          onChange={(date) => setCheckInDate(date)}
+          wrapperClassName="datePicker"
+          dateFormat="dd/MM/yyyy"
           className="form__date form__first-date form__text text__center"
-          type="text"
-          name="calendar"
           id="check-in"
-          value="Tue 15 Sept"
         />
         <label className="form__label dash" htmlFor="date">
           —
@@ -62,12 +70,13 @@ export function Form({ setResults }) {
         <label className="form__label form__text check-out" htmlFor="check-out">
           Check out
         </label>
-        <input
-          className="form__date form__last-date form__text text__center"
-          type="text"
-          name="calendar"
+        <DatePicker
+          selected={checkOutDate}
+          onChange={(date) => setCheckOutDate(date)}
+          wrapperClassName="datePicker"
+          dateFormat="dd/MM/yyyy"
+          className="form__date form__last-date form__text "
           id="check-out"
-          value="Sat 19 Sept"
         />
       </div>
       <div className="form__booking-block">

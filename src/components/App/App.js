@@ -14,25 +14,43 @@ import '../Header/Form/Form.css';
 export const App = () => {
   const [results, setResults] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [searchClicked, setSearchClicked] = useState(false);
+  const [filterValues, setFilterValues] = useState({
+    adults: 0,
+    children: 0,
+    rooms: 0,
+  });
   const handleSearch = (results) => {
     setResults(results);
-    console.log(results);
     setVisible(true);
+    setSearchClicked(true);
+  };
+
+  const handleSearchClick = () => {
   };
 
   return (
     <>
       <Sprite />
-      <Form setResults={handleSearch} />
-      <section className={`homes available ${visible ? '_visible' : ''}`}>
-        <Container>
-          <h2 className="homes__title text__center title">Available hotels</h2>
-          <Available className="available__hotels" hotels={results} />
-          <Button className="homes__arrow--ellipse">
-            <div className="homes__arrow--pike"></div>
-          </Button>
-        </Container>
-      </section>
+      <Form
+        setResults={handleSearch}
+        filterValues={filterValues}
+        setFilterValues={setFilterValues}
+        handleSearchClick={handleSearchClick}
+      />
+      {searchClicked && (
+        <section className={`homes available ${visible ? '_visible' : ''}`}>
+          <Container>
+            <h2 className="homes__title text__center title">
+              Available hotels
+            </h2>
+            <Available className="available__hotels" hotels={results} />
+            <Button className="homes__arrow--ellipse">
+              <div className="homes__arrow--pike"></div>
+            </Button>
+          </Container>
+        </section>
+      )}{' '}
       <section className="homes">
         <Container>
           <h2 className="homes__title text__center title">

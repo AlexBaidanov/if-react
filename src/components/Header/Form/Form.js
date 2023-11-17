@@ -5,13 +5,25 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import { Button } from '../../Button';
 import { Search } from '../../../Icons';
+import { FormFilter } from './FormFilter';
+
 import { searchUrl } from '../../../services/constants';
 import './Form.css';
 
-export function Form({ setResults }) {
+export function Form({
+  setResults,
+  filterValues,
+  setFilterValues,
+  // handleSearchClick,
+}) {
   const [search, setSearch] = useState('');
   const [checkInDate, setCheckInDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
+
+  const [filterVisible, setFilterVisible] = useState(false);
+  const toggleFilter = () => {
+    setFilterVisible(!filterVisible);
+  };
 
   async function hotelSearch() {
     const response = await fetch(`${searchUrl}=${search}`);
@@ -79,7 +91,7 @@ export function Form({ setResults }) {
           id="check-out"
         />
       </div>
-      <div className="form__booking-block">
+      <div className="form__booking-block" onClick={toggleFilter}>
         <input
           className="form__booking form__adults form__text _mobile text__center"
           type="text"
@@ -88,7 +100,7 @@ export function Form({ setResults }) {
         <input
           className="form__booking form__adults-num form__text text__center"
           type="text"
-          value="0"
+          value={filterValues.adults}
         />
         <input
           className="form__date form__dash-left form__text form__desktop text__center"
@@ -107,7 +119,7 @@ export function Form({ setResults }) {
         <input
           className="form__booking form__children-num form__text text__center"
           type="text"
-          value="0"
+          value={filterValues.children}
         />
         <input
           className="form__date form__dash-right form__text form__desktop text__center"
@@ -126,9 +138,15 @@ export function Form({ setResults }) {
         <input
           className="form__booking form__room-num form__text text__center"
           type="text"
-          value="0"
+          value={filterValues.rooms}
         />
       </div>
+      {filterVisible && (
+        <FormFilter
+          filterValues={filterValues}
+          setFilterValues={setFilterValues}
+        />
+      )}
       <Button className="form__button" type="submit">
         Search
       </Button>

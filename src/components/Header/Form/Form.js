@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -10,33 +10,45 @@ import { FormFilter } from './FormFilter';
 import { searchUrl } from '../../../services/constants';
 import './Form.css';
 
-export function Form({
-  setResults,
-  filterValues,
-  setFilterValues,
-  // handleSearchClick,
-}) {
+export function Form({ setResults, filterValues, setFilterValues }) {
   const [search, setSearch] = useState('');
   const [checkInDate, setCheckInDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
+
+  const [searchClicked, setSearchClicked] = useState(false);
 
   const [filterVisible, setFilterVisible] = useState(false);
   const toggleFilter = () => {
     setFilterVisible(!filterVisible);
   };
 
+  const handleSearchClick = () => {
+    setSearchClicked(true);
+  };
+
   async function hotelSearch() {
-    const response = await fetch(`${searchUrl}=${search}`);
-    const data = await response.json();
-    setResults(data);
+    if (searchClicked) {
+      if (filterValues.adults > 0 && filterValues.rooms > 0) {
+        const response = await fetch(`${searchUrl}=${search}`);
+        const data = await response.json();
+        setResults(data);
+      } else {
+        alert('Please select at least 1 adult and 1 room before booking.');
+      }
+      setSearchClicked(false);
+    }
   }
+
+  useEffect(() => {
+    hotelSearch();
+  }, [filterValues, searchClicked]);
 
   return (
     <form
       className="header__form"
       onSubmit={(event) => {
         event.preventDefault();
-        hotelSearch();
+        handleSearchClick();
       }}
     >
       <Search className="form__destination-search" />
@@ -147,7 +159,11 @@ export function Form({
           setFilterValues={setFilterValues}
         />
       )}
-      <Button className="form__button" type="submit">
+      <Button
+        className="form__button"
+        type="submit"
+        onClick={handleSearchClick}
+      >
         Search
       </Button>
     </form>

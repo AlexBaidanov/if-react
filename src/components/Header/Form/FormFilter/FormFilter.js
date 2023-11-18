@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import './FormFilter.css';
 
 export function FormFilter({ filterValues, setFilterValues }) {
-  const [adults, setAdults] = useState(0);
-  const [children, setChildren] = useState(0);
-  const [rooms, setRooms] = useState(0);
+  const [adults, setAdults] = useState(filterValues.adults);
+  const [children, setChildren] = useState(filterValues.children);
+  const [rooms, setRooms] = useState(filterValues.rooms);
   const [childrenAges, setChildrenAges] = useState([]);
 
   const min = 0;
@@ -13,21 +13,25 @@ export function FormFilter({ filterValues, setFilterValues }) {
 
   const handleIncrease = (value, setValue, max, filterKey) => {
     if (value < max) {
-      setValue(value + 1);
+      const newValue = value + 1;
+      setValue(newValue);
       setFilterValues({ ...filterValues, [filterKey]: value + 1 });
     }
   };
 
   const handleDecrease = (value, setValue, min, filterKey) => {
     if (value > min) {
-      setValue(value - 1);
+      const newValue = value - 1;
+      setValue(newValue);
       setFilterValues({ ...filterValues, [filterKey]: value - 1 });
     }
   };
 
   const handleIncreaseChildren = () => {
-    handleIncrease(children, setChildren, 10, 'children');
-    setChildrenAges([...childrenAges, 0]);
+    if (adults > 0) {
+      handleIncrease(children, setChildren, 10, 'children');
+      setChildrenAges([...childrenAges, 0]);
+    }
   };
 
   const handleDecreaseChildren = () => {
@@ -107,8 +111,8 @@ export function FormFilter({ filterValues, setFilterValues }) {
             <p className="filter__subtitle">
               What is the age of the child you’re travelling with?
             </p>
-            {childrenAges.map((age, index) => (
-              <select key={index} className="filter__select">
+            {Array.from({ length: children }, (_, i) => (
+              <select key={i} className="filter__select">
                 {[...Array(18).keys()].map((i) => (
                   <option key={i} value={i} className="filter__option">
                     {i} years old

@@ -26,8 +26,6 @@ export const App = () => {
     setSearchClicked(true);
   };
 
-  const handleSearchClick = () => {
-  };
 
   return (
     <>
@@ -36,7 +34,6 @@ export const App = () => {
         setResults={handleSearch}
         filterValues={filterValues}
         setFilterValues={setFilterValues}
-        handleSearchClick={handleSearchClick}
       />
       {searchClicked && (
         <section className={`homes available ${visible ? '_visible' : ''}`}>

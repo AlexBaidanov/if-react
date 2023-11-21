@@ -22,35 +22,40 @@ export function Form({ setResults, filterValues, setFilterValues }) {
     setFilterVisible(!filterVisible);
   };
 
-  const handleSearchClick = () => {
-    setSearchClicked(true);
-  };
-
   async function hotelSearch() {
-    if (searchClicked) {
-      if (filterValues.adults > 0 && filterValues.rooms > 0) {
-        const response = await fetch(`${searchUrl}=${search}`);
-        const data = await response.json();
-        setResults(data);
-      } else {
-        alert('Please select at least 1 adult and 1 room before booking.');
-      }
-      setSearchClicked(false);
-    }
+    const response = await fetch(`${searchUrl}=${search}`);
+    const data = await response.json();
+    setResults(data);
   }
 
+  function checkFilterValues() {
+    if (
+      filterValues.children > 0 &&
+      filterValues.adults === 0 &&
+      filterValues.rooms === 0
+    ) {
+      alert('Please select at least 1 adult and 1 room before booking.');
+      return false;
+    }
+    return true;
+  }
+
+  const handleSearchClick = (event) => {
+    event.preventDefault();
+    if (checkFilterValues()) {
+      setSearchClicked(true);
+    }
+  };
+
   useEffect(() => {
-    hotelSearch();
-  }, [filterValues, searchClicked]);
+    if (searchClicked) {
+      hotelSearch();
+      setSearchClicked(false);
+    }
+  }, [searchClicked]);
 
   return (
-    <form
-      className="header__form"
-      onSubmit={(event) => {
-        event.preventDefault();
-        handleSearchClick();
-      }}
-    >
+    <form className="header__form" onSubmit={handleSearchClick}>
       <Search className="form__destination-search" />
       <input
         className="form__destination form__text"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -15,47 +15,30 @@ export function Form({ setResults, filterValues, setFilterValues }) {
   const [checkInDate, setCheckInDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
 
-  const [searchClicked, setSearchClicked] = useState(false);
-
   const [filterVisible, setFilterVisible] = useState(false);
   const toggleFilter = () => {
     setFilterVisible(!filterVisible);
   };
 
   async function hotelSearch() {
-    const response = await fetch(`${searchUrl}=${search}`);
-    const data = await response.json();
-    setResults(data);
-  }
-
-  function checkFilterValues() {
-    if (
-      filterValues.children > 0 &&
-      filterValues.adults === 0 &&
-      filterValues.rooms === 0
-    ) {
+    console.log('auto');
+    if (filterValues.adults > 0 && filterValues.rooms > 0) {
+      const response = await fetch(`${searchUrl}=${search}`);
+      const data = await response.json();
+      setResults(data);
+    } else {
       alert('Please select at least 1 adult and 1 room before booking.');
-      return false;
     }
-    return true;
   }
-
-  const handleSearchClick = (event) => {
-    event.preventDefault();
-    if (checkFilterValues()) {
-      setSearchClicked(true);
-    }
-  };
-
-  useEffect(() => {
-    if (searchClicked) {
-      hotelSearch();
-      setSearchClicked(false);
-    }
-  }, [searchClicked]);
 
   return (
-    <form className="header__form" onSubmit={handleSearchClick}>
+    <form
+      className="header__form"
+      onSubmit={(event) => {
+        event.preventDefault();
+        hotelSearch();
+      }}
+    >
       <Search className="form__destination-search" />
       <input
         className="form__destination form__text"
@@ -164,11 +147,7 @@ export function Form({ setResults, filterValues, setFilterValues }) {
           setFilterValues={setFilterValues}
         />
       )}
-      <Button
-        className="form__button"
-        type="submit"
-        onClick={handleSearchClick}
-      >
+      <Button className="form__button" type="submit">
         Search
       </Button>
     </form>

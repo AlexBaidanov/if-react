@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Available } from '../Main/Available';
 import { Button } from '../Button';
 import { Container } from '../Container';
@@ -16,10 +16,14 @@ export const App = () => {
   const [visible, setVisible] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
 
+  const availableHotelsRef = useRef(null);
+
   const handleSearch = (results) => {
     setResults(results);
     setVisible(true);
     setSearchClicked(true);
+
+    availableHotelsRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -27,7 +31,10 @@ export const App = () => {
       <Sprite />
       <Form setResults={handleSearch} />
       {searchClicked && (
-        <section className={`homes available ${visible ? '_visible' : ''}`}>
+        <section
+          ref={availableHotelsRef}
+          className={`homes available ${visible ? '_visible' : ''}`}
+        >
           <Container>
             <h2 className="homes__title text__center title">
               Available hotels

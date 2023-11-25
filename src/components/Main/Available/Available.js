@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export const Available = ({ className, hotels }) => (
+const Available = ({ className, hotels }) => (
   <div className={classNames('description', className)}>
     {hotels.slice(0, 4).map((item) => (
       <figure key={item.id} className="homes__item _mobile">
@@ -14,3 +14,5 @@ export const Available = ({ className, hotels }) => (
     ))}
   </div>
 );
+
+export default Available;

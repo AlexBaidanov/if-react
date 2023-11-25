@@ -6,6 +6,7 @@ import { Search } from '../../../Icons';
 import { FormFilter } from './FormFilter';
 import { searchUrl } from '../../../services/constants';
 import './Form.css';
+import PropTypes from 'prop-types';
 
 export const Form = memo(function Form({ setResults }) {
   const [search, setSearch] = useState('');
@@ -161,3 +162,6 @@ export const Form = memo(function Form({ setResults }) {
     </form>
   );
 });
+Form.propTypes = {
+  setResults: PropTypes.func.isRequired,
+};

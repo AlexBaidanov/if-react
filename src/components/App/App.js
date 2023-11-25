@@ -1,5 +1,4 @@
 import React, { Suspense, useRef, useState } from 'react';
-// import { Available } from '../Main/Available';
 import { Button } from '../Button';
 import { Container } from '../Container';
 import { Form } from '../Header/Form';

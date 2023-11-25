@@ -1,6 +1,7 @@
 import React, { memo, useState } from 'react';
 
 import './FormFilter.css';
+import PropTypes from 'prop-types';
 
 export const FormFilter = memo(function FormFilter({
   filterValues,
@@ -129,3 +130,7 @@ export const FormFilter = memo(function FormFilter({
     </div>
   );
 });
+FormFilter.propTypes = {
+  filterValues: PropTypes.object.isRequired,
+  setFilterValues: PropTypes.func.isRequired,
+};

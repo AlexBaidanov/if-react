@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { getPosts } from '../../../services/posts';
+import PropTypes from 'prop-types';
 
 export const Homes = ({ className }) => {
   const [data, setData] = useState([]);
@@ -22,4 +23,8 @@ export const Homes = ({ className }) => {
       ))}
     </div>
   );
+};
+
+Homes.propTypes = {
+  className: PropTypes.string,
 };

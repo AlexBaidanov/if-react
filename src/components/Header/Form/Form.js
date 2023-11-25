@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Button } from '../../Button';
@@ -7,7 +7,7 @@ import { FormFilter } from './FormFilter';
 import { searchUrl } from '../../../services/constants';
 import './Form.css';
 
-export function Form({ setResults }) {
+export const Form = memo(function Form({ setResults }) {
   const [search, setSearch] = useState('');
   const [checkInDate, setCheckInDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
@@ -160,4 +160,4 @@ export function Form({ setResults }) {
       </Button>
     </form>
   );
-}
+});

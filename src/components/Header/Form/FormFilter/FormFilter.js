@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 
 import './FormFilter.css';
 
-export function FormFilter({ filterValues, setFilterValues }) {
+export const FormFilter = memo(function FormFilter({
+  filterValues,
+  setFilterValues,
+}) {
   const [adults, setAdults] = useState(filterValues.adults);
   const [children, setChildren] = useState(filterValues.children);
   const [rooms, setRooms] = useState(filterValues.rooms);
@@ -125,4 +128,4 @@ export function FormFilter({ filterValues, setFilterValues }) {
       </div>
     </div>
   );
-}
+});

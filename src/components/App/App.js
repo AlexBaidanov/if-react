@@ -15,26 +15,17 @@ export const App = () => {
   const [results, setResults] = useState([]);
   const [visible, setVisible] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
-  const [filterValues, setFilterValues] = useState({
-    adults: 0,
-    children: 0,
-    rooms: 0,
-  });
+
   const handleSearch = (results) => {
     setResults(results);
     setVisible(true);
     setSearchClicked(true);
   };
 
-
   return (
     <>
       <Sprite />
-      <Form
-        setResults={handleSearch}
-        filterValues={filterValues}
-        setFilterValues={setFilterValues}
-      />
+      <Form setResults={handleSearch} />
       {searchClicked && (
         <section className={`homes available ${visible ? '_visible' : ''}`}>
           <Container>
